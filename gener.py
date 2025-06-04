@@ -1,3 +1,7 @@
+import string
+from typing import List
+
+
 def stepping_cycle(iterable, step):
     buffer = []
     it = iter(iterable)
@@ -36,3 +40,34 @@ def count_replace(ex: str):
             end += 1
     return count, enter, end
 
+def first_duplicate(nums: List[int]):
+    seen = set()
+    for num in nums:
+        if num in seen:
+            return num
+        seen.add(num)
+        return None
+    return None
+
+def pangram(s: str):
+    alphabet = set(string.ascii_lowercase)
+    letters = set(c for c in s.lower() if c in alphabet)
+    return len(letters) == 26
+
+class MaMeta(type):
+    def __new__(cls, nom, bases, dct):
+        print(f"Création de la classe {nom}")
+        return super().__new__(cls, nom, bases, dct)
+
+class MaClasse(metaclass=MaMeta):
+    def __new__(cls, a):
+        print(f"Création de l'instance {cls} de la classe {cls.__name__}")
+        return super().__new__(cls)
+    def __init__(self, a):
+        self.a = a
+    @property
+    def carres(self):
+        return (x**2 for x in range(self.a))
+
+#m = MaClasse(10)
+#print([x for x in m.carres])
