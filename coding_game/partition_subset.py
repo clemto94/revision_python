@@ -20,6 +20,9 @@ Constraints:
 1 <= nums.length <= 200
 1 <= nums[i] <= 100
 """
+import math
+
+
 def canPartition(nums) -> bool:
     total = sum(nums)
 
@@ -55,4 +58,26 @@ def fibonacci_tab(n):
     dp = [0, 1]
     for i in range(2, n+1):
         dp.append(dp[i-1] + dp[i-2])
-    return dp[n]
+    return dp
+
+def is_premier(num):
+    if num <= 1:
+        return False
+    for i in range(2, int(math.sqrt(num)) + 1):
+        if num % i == 0:
+            return False
+    return True
+
+def nombres_premiers_jusqua(N):
+    if N < 2:
+        return []
+
+    est_premier = [True] * (N + 1)
+    est_premier[0] = est_premier[1] = False
+
+    for i in range(2, int(N**0.5) + 1):
+        if est_premier[i]:
+            for multiple in range(i * i, N + 1, i):
+                est_premier[multiple] = False
+
+    return [i for i, premier in enumerate(est_premier) if premier]
