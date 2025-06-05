@@ -63,7 +63,7 @@ def fibonacci_tab(n):
 def is_premier(num):
     if num <= 1:
         return False
-    for i in range(2, int(math.sqrt(num)) + 1):
+    for i in range(2, int(math.sqrt(num)) + 1): # num**0.5
         if num % i == 0:
             return False
     return True
